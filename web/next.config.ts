@@ -12,6 +12,14 @@ const nextConfig: NextConfig = {
     output: 'standalone',
     experimental: {
         turbo: {}
+    },
+    async rewrites() {
+        return [
+            {
+                source: '/:path*',
+                destination: 'http://localhost:8282/:path*'
+            }
+        ];
     }
 };
 
