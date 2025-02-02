@@ -10,22 +10,16 @@ import { navConfig } from '@/config/site';
 import { useMetaColor } from '@/hooks/use-meta-color';
 import { cn } from '@/lib/utils';
 
-import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle, DrawerTrigger } from './drawer';
+import { Drawer, DrawerContent, DrawerTrigger } from './drawer';
 
 export function MobileNav() {
     const [open, setOpen] = React.useState(false);
     const { setMetaColor, metaColor } = useMetaColor();
-    const triggerRef = React.useRef<HTMLButtonElement>(null);
 
     const onOpenChange = React.useCallback(
         (open: boolean) => {
             setOpen(open);
             setMetaColor(open ? '#09090b' : metaColor);
-
-            // Return focus to trigger when closing
-            if (!open && triggerRef.current) {
-                triggerRef.current.focus();
-            }
         },
         [setMetaColor, metaColor]
     );
@@ -33,7 +27,7 @@ export function MobileNav() {
     return (
         <Drawer open={open} onOpenChange={onOpenChange}>
             <DrawerTrigger asChild>
-                <Button ref={triggerRef} variant='ghost' size='icon' className='h-8 w-8 px-0 md:hidden'>
+                <Button variant='ghost' size='icon' className='h-8 w-8 px-0 md:hidden'>
                     <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
@@ -46,9 +40,7 @@ export function MobileNav() {
                     <span className='sr-only'>Toggle Menu</span>
                 </Button>
             </DrawerTrigger>
-            <DrawerContent>
-                <DrawerTitle className='sr-only'>Mobile menu</DrawerTitle>
-                <DrawerDescription className='sr-only'>Select an item</DrawerDescription>
+            <DrawerContent className='max-h-[60svh] p-0'>
                 <div className='overflow-auto p-6'>
                     <div className='flex flex-col space-y-3'>
                         {navConfig.mainNav?.map(

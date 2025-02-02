@@ -1,9 +1,7 @@
 import type { ReactNode } from 'react';
 
-import type { Metadata, Viewport } from 'next';
-import { Inter, Manrope } from 'next/font/google';
-
-// import localFont from 'next/font/local';
+import type { Metadata } from 'next';
+import localFont from 'next/font/local';
 
 import { ThemeProvider } from 'next-themes';
 
@@ -11,15 +9,20 @@ import '@/app/globals.css';
 import { Header } from '@/components/header';
 import { Toaster } from '@/components/ui/toaster';
 
-const inter = Inter({ subsets: ['latin'] });
+const geistSans = localFont({
+    src: './fonts/GeistVF.woff',
+    variable: '--font-geist-sans',
+    weight: '100 900'
+});
+const geistMono = localFont({
+    src: './fonts/GeistMonoVF.woff',
+    variable: '--font-geist-mono',
+    weight: '100 900'
+});
 
 export const metadata: Metadata = {
     title: 'Decypharr',
     description: 'A complete revamp of the UI.'
-};
-
-export const viewport: Viewport = {
-    maximumScale: 1
 };
 
 const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
@@ -27,12 +30,12 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
         // https://github.com/pacocoursey/next-themes?tab=readme-ov-file#with-app
         // https://react.dev/reference/react-dom/client/hydrateRoot#suppressing-unavoidable-hydration-mismatch-errors
         <html suppressHydrationWarning lang='en'>
-            <body className={`${inter.className} bg-background text-foreground min-h-[100dvh] antialiased`}>
+            <body className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground antialiased`}>
                 <ThemeProvider attribute='class'>
                     <Header />
                     <main>{children}</main>
-                    <Toaster />
                 </ThemeProvider>
+                <Toaster />
             </body>
         </html>
     );
