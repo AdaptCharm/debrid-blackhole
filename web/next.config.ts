@@ -4,12 +4,15 @@ import initializeBundleAnalyzer from '@next/bundle-analyzer';
 
 // https://www.npmjs.com/package/@next/bundle-analyzer
 const withBundleAnalyzer = initializeBundleAnalyzer({
-    enabled: process.env.BUNDLE_ANALYZER_ENABLED === 'true'
+    enabled: true
 });
 
 // https://nextjs.org/docs/pages/api-reference/next-config-js
 const nextConfig: NextConfig = {
-    output: 'standalone'
+    output: 'standalone',
+    experimental: {
+        turbo: {}
+    }
 };
 
-export default withBundleAnalyzer(nextConfig);
+export default process.env.BUNDLE_ANALYZER_ENABLED === 'true' ? withBundleAnalyzer(nextConfig) : nextConfig;
