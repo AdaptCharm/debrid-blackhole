@@ -1,9 +1,7 @@
 import type { ReactNode } from 'react';
 
 import type { Metadata, Viewport } from 'next';
-import { Inter, Manrope } from 'next/font/google';
-
-// import localFont from 'next/font/local';
+import { Inter } from 'next/font/google';
 
 import { ThemeProvider } from 'next-themes';
 
@@ -29,9 +27,11 @@ const Layout = ({ children }: Readonly<{ children: ReactNode }>) => {
         <html suppressHydrationWarning lang='en'>
             <body className={`${inter.className} bg-background text-foreground min-h-[100dvh] antialiased`}>
                 <ThemeProvider attribute='class'>
-                    <Header />
-                    <main>{children}</main>
-                    <Toaster />
+                    <div vaul-drawer-wrapper=''>
+                        <Header />
+                        <main>{children}</main>
+                        <Toaster />
+                    </div>
                 </ThemeProvider>
             </body>
         </html>

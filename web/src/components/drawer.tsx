@@ -7,7 +7,12 @@ import { cn } from '@/lib/utils';
 import { Drawer as DrawerPrimitive } from 'vaul';
 
 const Drawer = ({ shouldScaleBackground = true, ...props }: React.ComponentProps<typeof DrawerPrimitive.Root>) => (
-    <DrawerPrimitive.Root shouldScaleBackground={shouldScaleBackground} {...props} />
+    <DrawerPrimitive.Root
+        shouldScaleBackground={shouldScaleBackground}
+        setBackgroundColorOnScale={false}
+        autoFocus={true} // https://github.com/emilkowalski/vaul/issues/517#issuecomment-2571619213
+        {...props}
+    />
 );
 Drawer.displayName = 'Drawer';
 
@@ -39,9 +44,7 @@ const DrawerContent = React.forwardRef<
             )}
             {...props}>
             <div className='bg-muted mx-auto mt-4 h-2 w-[100px] rounded-full' />
-            <div role='dialog' aria-modal='true'>
-                {children}
-            </div>
+            {children}
         </DrawerPrimitive.Content>
     </DrawerPortal>
 ));
