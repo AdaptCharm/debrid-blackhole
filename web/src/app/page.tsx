@@ -1,5 +1,7 @@
+import TorrentsPage from '@/app/torrents/page';
+
 const Page = () => {
-    return 'Dasboard';
+    return <TorrentsPage />;
 };
 
 export default Page;
